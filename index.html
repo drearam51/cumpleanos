@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tommy XV - Convocatoria Oficial (Horizontal)</title>
-    <!-- Fuentes deportivas y modernas -->
+    <title>Tommy XV - Convocatoria Oficial</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Teko:wght@600;700&family=Russo+One&display=swap" rel="stylesheet">
-    <!-- Iconos para un look premium -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
             --primary: #00ff66;
-            --primary-glow: rgba(0, 255, 102, 0.4);
             --secondary: #ffdd00;
             --secondary-glow: rgba(255, 221, 0, 0.4);
             --alert: #ff3c00;
@@ -23,11 +20,7 @@
             --card-bg: rgba(5, 19, 9, 0.85);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: #020a04;
@@ -41,16 +34,13 @@
             overflow-x: hidden;
         }
 
-        /* Contenedor de la Tarjeta Horizontal (Laptop) */
         .invitation-card {
             width: 100%;
             max-width: 1100px;
-            /* Proporción estilo pantalla/ticket ancho */
             min-height: 600px; 
             background: radial-gradient(circle at 50% 15%, var(--light-pitch) 0%, var(--dark-pitch) 100%);
             border-radius: 24px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 
-                        0 0 40px rgba(0, 255, 102, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 255, 102, 0.2);
             position: relative;
             overflow: hidden;
             border: 2px solid rgba(0, 255, 102, 0.25);
@@ -59,461 +49,76 @@
             flex-direction: column;
         }
 
-        /* TEXTURA Y LÍNEAS DE CANCHA DE FÚTBOL HORIZONTAL */
-        .soccer-pitch {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.7;
-        }
+        /* Texturas Cancha */
+        .soccer-pitch { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; pointer-events: none; opacity: 0.7; }
+        .grass-stripes { position: absolute; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 40px, rgba(0, 0, 0, 0.06) 40px, rgba(0, 0, 0, 0.06) 80px); }
+        .pitch-lines { position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px; border: 2px solid rgba(255, 255, 255, 0.2); }
+        .center-circle { position: absolute; top: 50%; left: 50%; width: 180px; height: 180px; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 50%; transform: translate(-50%, -50%); }
+        .center-line { position: absolute; top: 20px; bottom: 20px; left: 50%; width: 2px; background: rgba(255, 255, 255, 0.2); transform: translateX(-50%); }
+        .penalty-box-left { position: absolute; top: 50%; left: 20px; width: 100px; height: 200px; border: 2px solid rgba(255, 255, 255, 0.2); border-left: none; transform: translateY(-50%); }
+        .penalty-box-right { position: absolute; top: 50%; right: 20px; width: 100px; height: 200px; border: 2px solid rgba(255, 255, 255, 0.2); border-right: none; transform: translateY(-50%); }
 
-        .grass-stripes {
-            position: absolute;
-            width: 100%; height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(255, 255, 255, 0.02) 0px,
-                rgba(255, 255, 255, 0.02) 40px,
-                rgba(0, 0, 0, 0.06) 40px,
-                rgba(0, 0, 0, 0.06) 80px
-            );
-        }
+        /* Luces */
+        .stadium-light-left { position: absolute; top: -50px; left: -50px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(0, 255, 102, 0.2) 0%, rgba(0,0,0,0) 70%); z-index: 2; }
+        .stadium-light-right { position: absolute; bottom: -50px; right: -50px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255, 221, 0, 0.15) 0%, rgba(0,0,0,0) 70%); z-index: 2; }
 
-        .pitch-lines {
-            position: absolute;
-            top: 20px; left: 20px; right: 20px; bottom: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
+        .card-content { position: relative; z-index: 10; width: 100%; height: 100%; display: flex; flex-direction: column; }
+        .ticket-header { text-align: center; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 15px; }
+        .badge { background: linear-gradient(135deg, var(--secondary) 0%, #ff8800 100%); color: #020a04; font-size: 0.8rem; font-weight: 900; letter-spacing: 4px; padding: 8px 20px; border-radius: 50px; text-transform: uppercase; box-shadow: 0 0 15px var(--secondary-glow); }
+        .category-text { font-size: 1rem; font-weight: 800; letter-spacing: 6px; color: var(--primary); text-transform: uppercase; }
 
-        .center-circle {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 180px; height: 180px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
+        .layout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; flex-grow: 1; align-items: start; }
+        .left-column, .right-column { display: flex; flex-direction: column; gap: 15px; }
 
-        .center-line {
-            position: absolute;
-            top: 20px; bottom: 20px; left: 50%;
-            width: 2px;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(-50%);
-        }
+        .player-hero { position: relative; text-align: center; background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 100%); border-radius: 20px; padding: 20px 10px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .jersey-badge { position: absolute; top: 15px; left: 25px; font-family: 'Russo One', sans-serif; font-size: 2.2rem; color: var(--secondary); text-shadow: 0 0 10px rgba(255,221,0,0.4); line-height: 1; }
+        .jersey-badge span { display: block; font-size: 0.6rem; font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: 1px; color: #ffffff; margin-top: -2px; }
+        .player-title { font-family: 'Teko', sans-serif; font-size: 7rem; font-weight: 700; line-height: 0.8; color: #ffffff; text-transform: uppercase; letter-spacing: 4px; text-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 3px 3px 0px #0e3d16, 6px 6px 0px #020a04; margin-bottom: 5px; margin-top: 10px; }
+        .subtitle-15 { font-family: 'Russo One', sans-serif; font-size: 1.4rem; letter-spacing: 4px; color: var(--secondary); text-transform: uppercase; }
 
-        .penalty-box-left {
-            position: absolute;
-            top: 50%; left: 20px;
-            width: 100px; height: 200px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-left: none;
-            transform: translateY(-50%);
-        }
+        .alert-box { background: rgba(255, 60, 0, 0.15); border: 1px solid var(--alert); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 4px 15px var(--alert-glow); }
+        .alert-title { color: var(--alert); font-size: 0.9rem; font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; text-transform: uppercase; }
+        .alert-desc { font-size: 0.85rem; color: #fff; line-height: 1.5; font-weight: 500; }
 
-        .penalty-box-right {
-            position: absolute;
-            top: 50%; right: 20px;
-            width: 100px; height: 200px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-right: none;
-            transform: translateY(-50%);
-        }
+        .countdown-container { text-align: center; background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 15px; border: 1px solid rgba(0, 255, 102, 0.2); }
+        .countdown-title { font-size: 0.75rem; font-weight: 800; letter-spacing: 3px; color: #a5c2ad; text-transform: uppercase; margin-bottom: 10px; }
+        .countdown-timer { display: flex; gap: 15px; justify-content: center; }
+        .time-box { background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(0, 255, 102, 0.4); border-radius: 10px; padding: 8px 15px; min-width: 60px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+        .time-box .num { display: block; font-family: 'Russo One', sans-serif; font-size: 1.5rem; color: var(--primary); }
+        .time-box .lbl { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: #a5c2ad; font-weight: bold; }
 
-        /* Luces de Estadio */
-        .stadium-light-left {
-            position: absolute;
-            top: -50px; left: -50px;
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(0, 255, 102, 0.2) 0%, rgba(0,0,0,0) 70%);
-            z-index: 2;
-        }
+        .details-board { background: var(--card-bg); border: 2px solid var(--primary); border-radius: 16px; padding: 15px 20px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 255, 102, 0.1); }
+        .detail-row { display: flex; align-items: center; padding: 8px 0; border-bottom: 1px dashed rgba(0, 255, 102, 0.2); }
+        .detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .detail-row:first-child { padding-top: 0; }
+        .detail-icon { font-size: 1.6rem; color: var(--secondary); width: 45px; text-align: center; filter: drop-shadow(0 0 5px var(--secondary-glow)); }
+        .detail-info { flex-grow: 1; padding-left: 10px; }
+        .detail-info label { display: block; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--primary); margin-bottom: 3px; }
+        .detail-info span { font-size: 1rem; font-weight: 700; color: #ffffff; line-height: 1.2; display: block; }
+        .detail-info .sub-span { font-size: 0.8rem; font-weight: 500; color: #9cd1ab; margin-top: 3px; }
 
-        .stadium-light-right {
-            position: absolute;
-            bottom: -50px; right: -50px;
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(255, 221, 0, 0.15) 0%, rgba(0,0,0,0) 70%);
-            z-index: 2;
-        }
+        .guest-highlight { font-size: 1.6rem !important; color: var(--secondary) !important; font-family: 'Russo One', sans-serif; letter-spacing: 1.5px; text-transform: uppercase; text-shadow: 0 0 8px rgba(255,221,0,0.3); word-break: break-word; }
 
-        /* CONTENIDO DE LA INVITACIÓN (GRID DE 2 COLUMNAS) */
-        .card-content {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
+        .kit-box { background: linear-gradient(90deg, rgba(255, 221, 0, 0.05) 0%, rgba(255, 221, 0, 0.12) 50%, rgba(255, 221, 0, 0.05) 100%); border: 1px solid var(--secondary); border-radius: 12px; padding: 12px 20px; text-align: center; box-shadow: 0 4px 15px rgba(255, 221, 0, 0.1); }
+        .kit-title { color: var(--secondary); font-size: 0.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 6px; }
+        .kit-desc { font-size: 0.85rem; font-weight: 600; line-height: 1.4; color: #f2fffa; }
 
-        /* Encabezado Principal */
-        .ticket-header {
-            text-align: center;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-        }
+        .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; background: rgba(0,0,0,0.4); border-radius: 12px; padding: 15px; border: 1px solid rgba(255,255,255,0.1); }
+        .rsvp-box { flex: 1; }
+        .rsvp-title { font-size: 0.75rem; color: var(--primary); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+        .rsvp-contacts { display: flex; gap: 10px; }
+        .whatsapp-btn { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: #ffffff; text-decoration: none; padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2); flex: 1; white-space: nowrap; }
 
-        .badge {
-            background: linear-gradient(135deg, var(--secondary) 0%, #ff8800 100%);
-            color: #020a04;
-            font-size: 0.8rem;
-            font-weight: 900;
-            letter-spacing: 4px;
-            padding: 8px 20px;
-            border-radius: 50px;
-            text-transform: uppercase;
-            box-shadow: 0 0 15px var(--secondary-glow);
-        }
+        .envelope-box { text-align: center; padding-left: 20px; border-left: 2px dashed rgba(255,255,255,0.2); }
+        .envelope-tag { font-family: 'Russo One', sans-serif; font-size: 1.1rem; color: var(--secondary); letter-spacing: 3px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 5px; text-shadow: 0 0 10px rgba(255, 221, 0, 0.2); }
+        .envelope-tag i { font-size: 1.8rem; }
 
-        .category-text {
-            font-size: 1rem;
-            font-weight: 800;
-            letter-spacing: 6px;
-            color: var(--primary);
-            text-transform: uppercase;
-        }
-
-        /* Estructura de Columnas */
-        .layout-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            flex-grow: 1;
-            align-items: start;
-        }
-
-        /* -- COLUMNA IZQUIERDA -- */
-        .left-column {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .player-hero {
-            position: relative;
-            text-align: center;
-            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 100%);
-            border-radius: 20px;
-            padding: 20px 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .jersey-badge {
-            position: absolute;
-            top: 15px;
-            left: 25px;
-            font-family: 'Russo One', sans-serif;
-            font-size: 2.2rem;
-            color: var(--secondary);
-            text-shadow: 0 0 10px rgba(255,221,0,0.4);
-            line-height: 1;
-        }
-
-        .jersey-badge span {
-            display: block;
-            font-size: 0.6rem;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: #ffffff;
-            margin-top: -2px;
-        }
-
-        .player-title {
-            font-family: 'Teko', sans-serif;
-            font-size: 7rem;
-            font-weight: 700;
-            line-height: 0.8;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2),
-                         3px 3px 0px #0e3d16,
-                         6px 6px 0px #020a04;
-            margin-bottom: 5px;
-            margin-top: 10px;
-        }
-
-        .subtitle-15 {
-            font-family: 'Russo One', sans-serif;
-            font-size: 1.4rem;
-            letter-spacing: 4px;
-            color: var(--secondary);
-            text-transform: uppercase;
-        }
-
-        /* Alerta de Aplazamiento */
-        .alert-box {
-            background: rgba(255, 60, 0, 0.15);
-            border: 1px solid var(--alert);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 4px 15px var(--alert-glow);
-        }
-
-        .alert-title {
-            color: var(--alert);
-            font-size: 0.9rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        .alert-desc {
-            font-size: 0.85rem;
-            color: #fff;
-            line-height: 1.5;
-            font-weight: 500;
-        }
-
-        /* Cronómetro */
-        .countdown-container {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid rgba(0, 255, 102, 0.2);
-        }
-        
-        .countdown-title {
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 3px;
-            color: #a5c2ad;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .countdown-timer {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .time-box {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 255, 102, 0.4);
-            border-radius: 10px;
-            padding: 8px 15px;
-            min-width: 60px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-        }
-
-        .time-box .num {
-            display: block;
-            font-family: 'Russo One', sans-serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        .time-box .lbl {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #a5c2ad;
-            font-weight: bold;
-        }
-
-        /* -- COLUMNA DERECHA -- */
-        .right-column {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        /* Tarjeta de Datos Técnicos */
-        .details-board {
-            background: var(--card-bg);
-            border: 2px solid var(--primary);
-            border-radius: 16px;
-            padding: 15px 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5),
-                        0 0 15px rgba(0, 255, 102, 0.1);
-        }
-
-        .detail-row {
-            display: flex;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px dashed rgba(0, 255, 102, 0.2);
-        }
-
-        .detail-row:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .detail-row:first-child {
-            padding-top: 0;
-        }
-
-        .detail-icon {
-            font-size: 1.6rem;
-            color: var(--secondary);
-            width: 45px;
-            text-align: center;
-            filter: drop-shadow(0 0 5px var(--secondary-glow));
-        }
-
-        .detail-info {
-            flex-grow: 1;
-            padding-left: 10px;
-        }
-
-        .detail-info label {
-            display: block;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--primary);
-            margin-bottom: 3px;
-        }
-
-        .detail-info span {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1.2;
-            display: block;
-        }
-
-        .detail-info .sub-span {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #9cd1ab;
-            margin-top: 3px;
-        }
-
-        .guest-highlight {
-            font-size: 1.6rem !important;
-            color: var(--secondary) !important;
-            font-family: 'Russo One', sans-serif;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            text-shadow: 0 0 8px rgba(255,221,0,0.3);
-        }
-
-        /* Kit / Requisitos */
-        .kit-box {
-            background: linear-gradient(90deg, rgba(255, 221, 0, 0.05) 0%, rgba(255, 221, 0, 0.12) 50%, rgba(255, 221, 0, 0.05) 100%);
-            border: 1px solid var(--secondary);
-            border-radius: 12px;
-            padding: 12px 20px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(255, 221, 0, 0.1);
-        }
-
-        .kit-title {
-            color: var(--secondary);
-            font-size: 0.8rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 6px;
-        }
-
-        .kit-desc {
-            font-size: 0.85rem;
-            font-weight: 600;
-            line-height: 1.4;
-            color: #f2fffa;
-        }
-
-        /* Sección de Confirmación (RSVP) & Sobres */
-        .footer-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            background: rgba(0,0,0,0.4);
-            border-radius: 12px;
-            padding: 15px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .rsvp-box {
-            flex: 1;
-        }
-
-        .rsvp-title {
-            font-size: 0.75rem;
-            color: var(--primary);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-
-        .rsvp-contacts {
-            display: flex;
-            gap: 10px;
-        }
-
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);
-            flex: 1;
-            white-space: nowrap;
-        }
-
-        /* Lluvia de Sobres Horizontal */
-        .envelope-box {
-            text-align: center;
-            padding-left: 20px;
-            border-left: 2px dashed rgba(255,255,255,0.2);
-        }
-
-        .envelope-tag {
-            font-family: 'Russo One', sans-serif;
-            font-size: 1.1rem;
-            color: var(--secondary);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            text-shadow: 0 0 10px rgba(255, 221, 0, 0.2);
-        }
-
-        .envelope-tag i {
-            font-size: 1.8rem;
-        }
-
-        .football-accent {
-            position: absolute;
-            bottom: -40px;
-            right: -20px;
-            font-size: 10rem;
-            color: rgba(255, 255, 255, 0.02);
-            pointer-events: none;
-            z-index: 1;
-            transform: rotate(-15deg);
-        }
+        .football-accent { position: absolute; bottom: -40px; right: -20px; font-size: 10rem; color: rgba(255, 255, 255, 0.02); pointer-events: none; z-index: 1; transform: rotate(-15deg); }
     </style>
 </head>
 <body>
 
     <div class="invitation-card">
-        <!-- Luces de Estadio y Cancha de Fondo -->
         <div class="stadium-light-left"></div>
         <div class="stadium-light-right"></div>
         <div class="soccer-pitch">
@@ -529,73 +134,46 @@
         <i class="fa-solid fa-soccer-ball football-accent"></i>
 
         <div class="card-content">
-            
-            <!-- Encabezado -->
             <div class="ticket-header">
                 <div class="badge">CONVOCATORIA VIP</div>
                 <div class="category-text">FICHAS DE JUEGO</div>
             </div>
 
-            <!-- GRID PRINCIPAL DE 2 COLUMNAS -->
             <div class="layout-grid">
-                
-                <!-- COLUMNA IZQUIERDA -->
                 <div class="left-column">
-                    <!-- Héroe / Jugador -->
                     <div class="player-hero">
-                        <div class="jersey-badge">
-                            15
-                            <span>NÚMERO</span>
-                        </div>
+                        <div class="jersey-badge">15<span>NÚMERO</span></div>
                         <h1 class="player-title">TOMMY</h1>
                         <div class="subtitle-15">MIS 15 AÑOS</div>
                     </div>
 
-                    <!-- NOTA DE APLAZAMIENTO -->
                     <div class="alert-box">
                         <div class="alert-title"><i class="fa-solid fa-triangle-exclamation"></i> ¡ACTUALIZACIÓN IMPORTANTE!</div>
                         <div class="alert-desc">El partido ha sido aplazado al <strong>Lunes 15 de Junio</strong> dado que los deportistas tienen demasiados eventos deportivos este fin de semana. ¡Los esperamos recargados!</div>
                     </div>
 
-                    <!-- Contador Dinámico -->
                     <div class="countdown-container">
                         <div class="countdown-title">⚡ TIEMPO PARA EL PITAZO INICIAL ⚡</div>
                         <div class="countdown-timer" id="timer">
-                            <div class="time-box">
-                                <span class="num" id="days">--</span>
-                                <span class="lbl">Días</span>
-                            </div>
-                            <div class="time-box">
-                                <span class="num" id="hours">--</span>
-                                <span class="lbl">Hrs</span>
-                            </div>
-                            <div class="time-box">
-                                <span class="num" id="minutes">--</span>
-                                <span class="lbl">Min</span>
-                            </div>
-                            <div class="time-box">
-                                <span class="num" id="seconds">--</span>
-                                <span class="lbl">Seg</span>
-                            </div>
+                            <div class="time-box"><span class="num" id="days">--</span><span class="lbl">Días</span></div>
+                            <div class="time-box"><span class="num" id="hours">--</span><span class="lbl">Hrs</span></div>
+                            <div class="time-box"><span class="num" id="minutes">--</span><span class="lbl">Min</span></div>
+                            <div class="time-box"><span class="num" id="seconds">--</span><span class="lbl">Seg</span></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- COLUMNA DERECHA -->
                 <div class="right-column">
-                    <!-- Ficha Técnica de Detalles del Partido -->
                     <div class="details-board">
-                        <!-- SECCIÓN PERSONALIZABLE: NOMBRE DEL INVITADO -->
                         <div class="detail-row" style="background: rgba(255, 221, 0, 0.05); border-radius: 8px; margin-bottom: 8px; border-bottom: 1px solid rgba(0, 255, 102, 0.3); padding: 8px 10px;">
                             <div class="detail-icon"><i class="fa-solid fa-id-card-clip"></i></div>
                             <div class="detail-info">
                                 <label style="color: #ffffff;">CONVOCADO OFICIAL:</label>
-                                <!-- AQUÍ CAMBIAS EL NOMBRE PARA CADA INVITADO -->
-                                <span class="guest-highlight">Alejo</span>
+                                <!-- Aquí es donde el JavaScript inyectará el nombre -->
+                                <span class="guest-highlight" id="guest-name">Cargando...</span>
                             </div>
                         </div>
 
-                        <!-- Fecha Actualizada -->
                         <div class="detail-row">
                             <div class="detail-icon"><i class="fa-solid fa-calendar-day"></i></div>
                             <div class="detail-info">
@@ -603,7 +181,6 @@
                                 <span>Lunes, 15 de Junio de 2026</span>
                             </div>
                         </div>
-                        <!-- Hora -->
                         <div class="detail-row">
                             <div class="detail-icon"><i class="fa-solid fa-clock"></i></div>
                             <div class="detail-info">
@@ -612,7 +189,6 @@
                                 <div class="sub-span">¡Se agradece puntualidad!</div>
                             </div>
                         </div>
-                        <!-- Lugar -->
                         <div class="detail-row">
                             <div class="detail-icon"><i class="fa-solid fa-location-dot"></i></div>
                             <div class="detail-info">
@@ -623,15 +199,12 @@
                         </div>
                     </div>
 
-                    <!-- Kit / Requisitos de Cancha -->
                     <div class="kit-box">
                         <div class="kit-title">📋 REGLAMENTO DE VESTUARIO</div>
                         <div class="kit-desc">Obligatorio llevar ropa deportiva para el juego y una mudanza de cambio para después de la acción.</div>
                     </div>
 
-                    <!-- Footer: RSVP y Lluvia de Sobres compartiendo espacio -->
                     <div class="footer-row">
-                        <!-- Confirmación de Asistencia (RSVP) -->
                         <div class="rsvp-box">
                             <div class="rsvp-title">Confirmar asistencia (Cuerpo Técnico):</div>
                             <div class="rsvp-contacts">
@@ -644,7 +217,6 @@
                             </div>
                         </div>
 
-                        <!-- Lluvia de Sobres -->
                         <div class="envelope-box">
                             <div class="envelope-tag">
                                 <i class="fa-solid fa-envelope-open-text"></i>
@@ -659,9 +231,28 @@
         </div>
     </div>
 
-    <!-- Script del Reloj Regresivo -->
     <script>
-        // Nueva fecha configurada: 15 de Junio de 2026 a las 12:00:00
+        // --- 1. LÓGICA PARA EL NOMBRE EN LA URL ---
+        document.addEventListener("DOMContentLoaded", () => {
+            // Obtener lo que hay después del '?' en la URL
+            const queryString = window.location.search;
+            let guestName = "Invitado VIP"; // Nombre por defecto
+
+            if (queryString) {
+                // Quitar el '?' y decodificar caracteres especiales (como %20 para espacios)
+                let rawName = decodeURIComponent(queryString.substring(1));
+                
+                // Poner la primera letra en mayúscula por estética
+                if (rawName.length > 0) {
+                    guestName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+                }
+            }
+
+            // Inyectar el nombre en el HTML
+            document.getElementById('guest-name').innerText = guestName;
+        });
+
+        // --- 2. LÓGICA DEL CONTADOR REGRESIVO ---
         const targetDate = new Date("June 15, 2026 12:00:00").getTime();
 
         const countdown = setInterval(function() {
